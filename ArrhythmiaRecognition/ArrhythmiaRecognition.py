@@ -10,19 +10,33 @@ import neurolab as nl
 import matplotlib.pyplot as plot
 import os.path
 
+"""
+    Correlation of every two columns that don't have missing values is counted.
+    Columns represent values of one attribute of EKG
+"""
 def seeCorrelation(lines):
     columns = []
+
+    #Adds every column in columns which don't have missing values
     for j in range(0, len(lines[0])):
         column = []
         for i in range(0, len(lines)):
-            if not (lines[i].__contains__("?")):
+            if not (lines[i][j] == "?"):
                 column.append(lines[i][j])
-        columns.append(column)
+        if(len(column) == len(lines)):
+            columns.append(column)
+
+    #From string to float attribute values
     for i in range(0, len(columns)):
         for j in range(0, len(columns[0])):
             columns[i][j] = float(columns[i][j])
-    output = nmp.correlate(columns[0], columns[1], mode='full')
-    print(output)
+
+    #For every two columns counts correlation
+    for i in range(0, len(columns)):
+        for j in range(i+1, len(columns)):
+            print("Correlation for "+str(i)+" "+str(j))
+            print(nmp.corrcoef(columns[i], columns[j]))
+
 
 """
     Loads EKG attributes from file, 452 EKG rows with 279 attributes.
@@ -42,6 +56,7 @@ def loadData():
     for i in range (0, len(lines)):
         lines[i] = lines[i].split(',')
 
+    seeCorrelation(lines)
     #select only attributes that will be used for training neural network
     for i in range(0, len(lines)):
         selected.append([])
@@ -73,34 +88,56 @@ def loadData():
             lines[i][j] = float(lines[i][j])
     return lines, results
 
+
+"""
+    Tests number of successful classified arrhythmia.
+    Output is percentage.
+"""
+def test(net, XTest, YTest):
+    netOutput = net.sim(XTest)
+    true = 0
+    for i in range(0, len(netOutput)):
+        for j in range(0, 16):
+            if (netOutput[i][j] == max(netOutput[i])):
+                if (YTest[i][j] == 1.0):
+                    true += 1
+    print(true/len(XTest))
+
+
+"""
+    Splits data in two arrays, first is 80% of data and it will be used for training NN.
+    20% is for testing NN.
+"""
 def splitData(X, Y):
-    XValidation, YValidation = [], []
     XTest, YTest = [], []
     XInput, YOutput = [], []
     validationStart = (int)(len(X) - len(X) * 0.1 * 2)
-    testStart = (int)(len(X) - len(X) * 0.1)
     for i in range(0, validationStart):
         XInput.append(X[i])
         YOutput.append(Y[i])
-    for i in range(validationStart, testStart):
-        XValidation.append(X[i])
-        YValidation.append(Y[i])
-    for i in range(testStart, len(X)):
+    for i in range(validationStart, len(X)):
         XTest.append(X[i])
         YTest.append(Y[i])
-    return XInput, YOutput, XValidation, YValidation, XTest, YTest
+    return XInput, YOutput, XTest, YTest
 
+
+"""
+    Making NN and training it if it doesn't exist in training.net file.
+"""
 def setNN(input, output):
-    XInput, YOutput, XValidation, YValidation, XTest, YTest = splitData(input, output)
+    XInput, YOutput, XTest, YTest = splitData(input, output)
     if os.path.isfile("training.net"):
         return nl.load("training.net")
-    net = nl.net.newff([[0, 1000]] * len(XInput[0]), [18, 16])
+    net = nl.net.newff([[0, 400]] * len(XInput[0]), [32, 16])
     net.trainf = nl.net.train.train_rprop
     net.out_minmax = [0, 1]
     net.init()
-    result = net.train(XInput, YOutput, epochs=5000, show=1, goal=0.000001)
+    result = net.train(XInput, YOutput, epochs=5000, show=1, goal=0.00001)
     net.save("training.net")
     res = net.sim(XInput)
+    plot.plot(XInput, YOutput)
+
+    #how many good classifications
     true = 0
     for i in range(0, len(res)):
         print(max(res[i]), res[i])
@@ -109,7 +146,6 @@ def setNN(input, output):
                 if (YOutput[i][j] == 1.0):
                     true += 1
     print(true)
-
     return net
 
 if __name__ == '__main__':
@@ -117,29 +153,6 @@ if __name__ == '__main__':
     #reasearch columns
     input, output = loadData()
     net = setNN(input, output)
-    XInput, YOutput, XValidation, YValidation, XTest, YTest = splitData(input, output)
-    print(YValidation)
-    res = net.sim(XValidation)
-    true = 0
-    for i in range(0, len(res)):
-        print(max(res[i]), res[i])
-        for j in range(0, 16):
-            if (res[i][j] == max(res[i])):
-                if (YValidation[i][j] == 1.0):
-                    true += 1
-    print(true)
-    res = net.sim(XTest)
-    true = 0
-    for i in range(0, len(res)):
-        print(max(res[i]), res[i])
-        for j in range(0, 16):
-            if (res[i][j] == max(res[i])):
-                if (YTest[i][j] == 1.0):
-                    true += 1
-    print(len(XTest))
-    print(true)
+    XInput, YOutput, XTest, YTest = splitData(input, output)
+    test(net, XTest, YTest)
 
-    #y = net.sim(result.net, XInput)
-    #plot.plot(XInput, net.sim(XInput), col="blue", pch="+")
-    #plot.plot(XInput, YOutput, col="red", pch="+")
-    #net.points(XInput, YOutput, col="red", pch="x")
