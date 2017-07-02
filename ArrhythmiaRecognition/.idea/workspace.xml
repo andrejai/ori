@@ -10,7 +10,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/ArrhythmiaRecognition$ArrhythmiaRecognition.coverage" NAME="ArrhythmiaRecognition Coverage Results" MODIFIED="1499002801323" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/ArrhythmiaRecognition$ArrhythmiaRecognition.coverage" NAME="ArrhythmiaRecognition Coverage Results" MODIFIED="1499013720376" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -21,10 +21,16 @@
       <file leaf-file-name="ArrhythmiaRecognition.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ArrhythmiaRecognition.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="361">
-              <caret line="281" column="0" lean-forward="true" selection-start-line="281" selection-start-column="0" selection-end-line="281" selection-end-column="0" />
+            <state relative-caret-position="-31">
+              <caret line="318" column="58" lean-forward="true" selection-start-line="318" selection-start-column="58" selection-end-line="318" selection-end-column="58" />
               <folding>
                 <element signature="e#214#234#0" expanded="true" />
+                <element signature="e#509#1193#0" expanded="false" />
+                <element signature="e#1604#3247#0" expanded="false" />
+                <element signature="e#3391#5295#0" expanded="false" />
+                <element signature="e#5418#5781#0" expanded="false" />
+                <element signature="e#5880#6239#0" expanded="false" />
+                <element signature="e#6391#6733#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -43,7 +49,7 @@
       <file leaf-file-name="gd.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../../VOProjekat/Lib/site-packages/neurolab/train/gd.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5253">
+            <state relative-caret-position="279">
               <caret line="311" column="0" lean-forward="false" selection-start-line="311" selection-start-column="0" selection-end-line="311" selection-end-column="0" />
               <folding />
             </state>
@@ -53,7 +59,7 @@
       <file leaf-file-name="pyplot.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../../VOProjekat/Lib/site-packages/matplotlib/pyplot.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
+            <state relative-caret-position="55318">
               <caret line="3304" column="4" lean-forward="false" selection-start-line="3304" selection-start-column="4" selection-end-line="3304" selection-end-column="4" />
               <folding />
             </state>
@@ -63,7 +69,7 @@
       <file leaf-file-name="arrhythmia.names.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/arrhythmia.names.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2858">
+            <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
@@ -135,7 +141,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -151,6 +156,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -427,6 +433,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329653" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329653" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3769716" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -439,7 +446,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -460,6 +466,68 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#214#234#0" expanded="true" />
+            <element signature="e#509#1193#0" expanded="false" />
+            <element signature="e#1604#3247#0" expanded="false" />
+            <element signature="e#3391#5295#0" expanded="false" />
+            <element signature="e#5418#5781#0" expanded="false" />
+            <element signature="e#5880#6239#0" expanded="false" />
+            <element signature="e#6391#6733#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../VOProjekat/Lib/site-packages/neurolab/train/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="901">
+          <caret line="53" column="30" lean-forward="false" selection-start-line="53" selection-start-column="25" selection-end-line="53" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../VOProjekat/Lib/site-packages/neurolab/train/gd.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5287">
+          <caret line="311" column="0" lean-forward="false" selection-start-line="311" selection-start-column="0" selection-end-line="311" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../VOProjekat/Lib/site-packages/matplotlib/pyplot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="56168">
+          <caret line="3304" column="4" lean-forward="false" selection-start-line="3304" selection-start-column="4" selection-end-line="3304" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/arrhythmia.names.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../VOProjekat/Lib/site-packages/neurolab/net.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1530">
+          <caret line="90" column="51" lean-forward="false" selection-start-line="90" selection-start-column="47" selection-end-line="90" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ArrhythmiaRecognition.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#214#234#0" expanded="true" />
+            <element signature="e#509#1193#0" expanded="false" />
+            <element signature="e#1604#3247#0" expanded="false" />
+            <element signature="e#3391#5295#0" expanded="false" />
+            <element signature="e#5418#5781#0" expanded="false" />
+            <element signature="e#5880#6239#0" expanded="false" />
+            <element signature="e#6391#6733#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -492,7 +560,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="5" column="69" lean-forward="false" selection-start-line="5" selection-start-column="69" selection-end-line="5" selection-end-column="69" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -516,6 +583,12 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#214#234#0" expanded="true" />
+            <element signature="e#509#1193#0" expanded="false" />
+            <element signature="e#1604#3247#0" expanded="false" />
+            <element signature="e#3391#5295#0" expanded="false" />
+            <element signature="e#5418#5781#0" expanded="false" />
+            <element signature="e#5880#6239#0" expanded="false" />
+            <element signature="e#6391#6733#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -532,6 +605,12 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#214#234#0" expanded="true" />
+            <element signature="e#509#1193#0" expanded="false" />
+            <element signature="e#1604#3247#0" expanded="false" />
+            <element signature="e#3391#5295#0" expanded="false" />
+            <element signature="e#5418#5781#0" expanded="false" />
+            <element signature="e#5880#6239#0" expanded="false" />
+            <element signature="e#6391#6733#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -548,6 +627,12 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#214#234#0" expanded="true" />
+            <element signature="e#509#1193#0" expanded="false" />
+            <element signature="e#1604#3247#0" expanded="false" />
+            <element signature="e#3391#5295#0" expanded="false" />
+            <element signature="e#5418#5781#0" expanded="false" />
+            <element signature="e#5880#6239#0" expanded="false" />
+            <element signature="e#6391#6733#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -588,25 +673,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../VOProjekat/Lib/site-packages/neurolab/train/gd.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5253">
-          <caret line="311" column="0" lean-forward="false" selection-start-line="311" selection-start-column="0" selection-end-line="311" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/arrhythmia.data.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="14" column="48" lean-forward="false" selection-start-line="14" selection-start-column="48" selection-end-line="14" selection-end-column="48" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../../VOProjekat/Lib/site-packages/matplotlib/pyplot.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
+        <state relative-caret-position="55318">
           <caret line="3304" column="4" lean-forward="false" selection-start-line="3304" selection-start-column="4" selection-end-line="3304" selection-end-column="4" />
           <folding />
         </state>
@@ -614,18 +690,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/arrhythmia.names.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2858">
+        <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../VOProjekat/Lib/site-packages/neurolab/train/gd.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="279">
+          <caret line="311" column="0" lean-forward="false" selection-start-line="311" selection-start-column="0" selection-end-line="311" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ArrhythmiaRecognition.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="281" column="0" lean-forward="true" selection-start-line="281" selection-start-column="0" selection-end-line="281" selection-end-column="0" />
+        <state relative-caret-position="-31">
+          <caret line="318" column="58" lean-forward="true" selection-start-line="318" selection-start-column="58" selection-end-line="318" selection-end-column="58" />
           <folding>
             <element signature="e#214#234#0" expanded="true" />
+            <element signature="e#509#1193#0" expanded="false" />
+            <element signature="e#1604#3247#0" expanded="false" />
+            <element signature="e#3391#5295#0" expanded="false" />
+            <element signature="e#5418#5781#0" expanded="false" />
+            <element signature="e#5880#6239#0" expanded="false" />
+            <element signature="e#6391#6733#0" expanded="false" />
           </folding>
         </state>
       </provider>

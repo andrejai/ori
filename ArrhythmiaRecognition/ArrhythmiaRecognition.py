@@ -9,6 +9,7 @@ import numpy as nmp
 import neurolab as nl
 import matplotlib.pyplot as plot
 import os.path
+import sys
 
 """
     Correlation of every two columns that don't have missing values is counted.
@@ -96,7 +97,10 @@ def loadData():
             lines[i][j] = lines[i][j]/maxVal
     return lines, results
 
-
+"""
+    Load EKG attributes and eliminate missing values and invalid EKG results.
+    Returns list of EKG results.
+"""
 def loadAllData():
     print("\nLoading all attributes...")
     file = open("arrhythmia.data.txt", 'r')
@@ -171,7 +175,7 @@ def test(net, XTest, YTest):
             if (netOutput[i][j] == max(netOutput[i])):
                 if (YTest[i][j] == 1.0):
                     true += 1
-    print("\n\n\n\tPercentage of correctly classified arrhythmia using NN is: {0}" \
+    print("\n\n\tPercentage of correctly classified arrhythmia using NN is: {0}" \
         .format(true/len(XTest)))
 
 """
@@ -181,11 +185,11 @@ def testOneOutput(net, XTest, YTest):
     netOutput = net.sim(XTest)
     true = 0
     for i in range(0, len(netOutput)):
-        if (abs(netOutput[i][0]) > 0.6 and YTest[i][0] == 1):
+        if (netOutput[i][0] > 0.6 and YTest[i][0] == 1):
             true += 1
-        elif (abs(netOutput[i][0]) < 0.6 and YTest[i][0] == 0):
+        elif (netOutput[i][0] < 0.6 and YTest[i][0] == 0):
             true += 1
-    print("\n\n\n\tPercentage of correctly discovered arrhythmia using NN is: {0}" \
+    print("\n\n\tPercentage of correctly discovered arrhythmia using NN is: {0}" \
           .format(true / len(XTest)))
 
 
@@ -207,18 +211,20 @@ def splitData(X, Y):
 
 
 """
-    Making NN and training it if it doesn't exist in training.net file.
+    Making NN and training it if it doesn't exist in path file.
 """
-def setNN(input, output):
+def setNN(input, output, path, neurons, epochs):
     print("\n\tResilient backpropagation network, important attributes only...")
     XInput, YOutput, XTest, YTest = splitData(input, output)
-    if os.path.isfile("training.net"):
-        return nl.load("training.net")
-    net = nl.net.newff([[-1, 1]] * len(XInput[0]), [32, 16])
+    if os.path.isfile(path):
+        print("\n\tLoading network from "+path)
+        return nl.load(path)
+
+    net = nl.net.newff([[-1, 1]] * len(XInput[0]), [neurons, 16])
     net.trainf = nl.net.train.train_rprop
     net.init()
-    result = net.train(XInput, YOutput, epochs=10000, show=1, goal=0.0001)
-    net.save("training.net")
+    result = net.train(XInput, YOutput, epochs=epochs, show=1, goal=0.0001)
+    net.save(path)
     res = net.sim(XInput)
     plot.plot(XInput, YOutput)
 
@@ -232,16 +238,17 @@ def setNN(input, output):
     print(true)
     return net
 
-def setAllNN(input, output):
+def setAllNN(input, output, path, neurons):
     print("\n\tResilient backpropagation network, all attributes...")
     XInput, YOutput, XTest, YTest = splitData(input, output)
-    if os.path.isfile("trainingAll.net"):
-        return nl.load("trainingAll.net")
-    net = nl.net.newff([[-1, 1]] * len(XInput[0]), [30, 16])
+    if os.path.isfile(path):
+        print("\n\tLoading network from " + path)
+        return nl.load(path)
+    net = nl.net.newff([[-1, 1]] * len(XInput[0]), [neurons, 16])
     net.trainf = nl.net.train.train_rprop
     net.init()
     result = net.train(XInput, YOutput, epochs=50, show=1, goal=0.00001)
-    net.save("trainingAll.net")
+    net.save("training_all_30_16.net")
     res = net.sim(XInput)
     plot.plot(XInput, YOutput)
 
@@ -256,15 +263,16 @@ def setAllNN(input, output):
     print(true)
     return net
 
-def setNNOneOutput(input, output, path, neurons):
+def setNNOneOutput(input, output, path, neurons, epochs):
     print("\n\tResilient backpropagation network, recognizing existence of arrhythmia...")
     XInput, YOutput, XTest, YTest = splitData(input, output)
     if os.path.isfile(path):
+        print("\n\tLoading network from " + path)
         return nl.load(path)
     net = nl.net.newff([[-1, 1]] * len(XInput[0]), [neurons, 1])
     net.trainf = nl.net.train.train_bfgs
     net.init()
-    result = net.train(XInput, YOutput, epochs=200, show=1, goal=0.0001)
+    result = net.train(XInput, YOutput, epochs=epochs, show=1, goal=0.0001)
     net.save(path)
     res = net.sim(XInput)
     plot.plot(XInput, YOutput)
@@ -291,21 +299,39 @@ def decreaseOutput(output):
 
 if __name__ == '__main__':
 
-    #all columns
-    input, output = loadAllData()
-    net = setAllNN(input, output)
-    XInput, YOutput, XTest, YTest = splitData(input, output)
-    test(net, XTest, YTest)
+    #all columns with 30 neurons in hidden layer
+    inp, output = loadAllData()
+    net_all = setAllNN(inp, output, "training_all_30_16.net", 30)
+    XInput, YOutput, XTest, YTest = splitData(inp, output)
+    test(net_all, XTest, YTest)
 
     #research columns
-    input, output = loadData()
-    net = setNN(input, output)
-    XInput, YOutput, XTest, YTest = splitData(input, output)
-    test(net, XTest, YTest)
+    inp, output = loadData()
+    net_18_100 = setNN(inp, output, "training_18_32_16_100epochs.net", 32, 100)
+    XInput, YOutput, XTest, YTest = splitData(inp, output)
+    test(net_18_100, XTest, YTest)
 
     #training one output, only if arrhythmia exists with 18 attributes
-    input, output = loadData()
+    inp, output = loadData()
+    print (inp)
     output = decreaseOutput(output)
-    net = setNNOneOutput(input, output, "trainingOneOutput.net", 2)
-    XInput, YOutput, XTest, YTest = splitData(input, output)
+    net = setNNOneOutput(inp, output, "trainingOneOutput.net", 6, 500)
+    XInput, YOutput, XTest, YTest = splitData(inp, output)
     testOneOutput(net, XTest, YTest)
+
+    user_input = input("Enter data, press enter to finish: ")
+    if(user_input != ""):
+        line = []
+        line.append(user_input.split(','))
+        for i in range(0, len(line[0])):
+           line[0][i] = float(line[0][i])
+        if abs(net.sim(line)) > 0.6:
+            print("Arrythmia exists!")
+        else:
+            print("Arrythmia doesn't exist!")
+        res = net_18_100.sim(line)
+        for r in range(0, len(res)):
+            if(res[0][r] == max(res[0])):
+                print("Arrythmia class: {0}"\
+                      .format(r+1))
+
