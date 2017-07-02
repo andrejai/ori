@@ -31,6 +31,8 @@ def seeCorrelation(lines):
     for i in range(0, len(columns)):
         for j in range(0, len(columns[0])):
             columns[i][j] = float(columns[i][j])
+    correlations = []
+
 
     #For every two columns counts correlation
     for i in range(0, len(columns)):
@@ -174,6 +176,10 @@ def test(net, XTest, YTest):
         for j in range(0, len(YTest[0])):
             if (netOutput[i][j] == max(netOutput[i])):
                 if (YTest[i][j] == 1.0):
+                    print(j)
+                    print(max(netOutput[i]))
+                    print(netOutput[i])
+                    print(XTest[i])
                     true += 1
     print("\n\n\tPercentage of correctly classified arrhythmia using NN is: {0}" \
         .format(true/len(XTest)))
@@ -270,7 +276,7 @@ def setNNOneOutput(input, output, path, neurons, epochs):
         print("\n\tLoading network from " + path)
         return nl.load(path)
     net = nl.net.newff([[-1, 1]] * len(XInput[0]), [neurons, 1])
-    net.trainf = nl.net.train.train_bfgs
+    net.trainf = nl.net.train.train_rprop
     net.init()
     result = net.train(XInput, YOutput, epochs=epochs, show=1, goal=0.0001)
     net.save(path)
@@ -297,6 +303,14 @@ def decreaseOutput(output):
             result.append([0])
     return result
 
+def writeTestsToFile(XTest, YTest):
+    f = open('test.txt', 'w')
+    testData = ""
+    for i in range(0, len(XTest)):
+        testData += str(XTest[i]) + " " + str(YTest[i].index(1) + 1) + "\n"
+    f.write(testData)
+    f.close()
+
 if __name__ == '__main__':
 
     #all columns with 30 neurons in hidden layer
@@ -309,29 +323,30 @@ if __name__ == '__main__':
     inp, output = loadData()
     net_18_100 = setNN(inp, output, "training_18_32_16_100epochs.net", 32, 100)
     XInput, YOutput, XTest, YTest = splitData(inp, output)
+    writeTestsToFile(XTest, YTest)
     test(net_18_100, XTest, YTest)
 
     #training one output, only if arrhythmia exists with 18 attributes
     inp, output = loadData()
-    print (inp)
     output = decreaseOutput(output)
-    net = setNNOneOutput(inp, output, "trainingOneOutput.net", 6, 500)
+    net = setNNOneOutput(inp, output, "trainingOneOutputProba.net", 6, 500)
     XInput, YOutput, XTest, YTest = splitData(inp, output)
     testOneOutput(net, XTest, YTest)
 
     user_input = input("Enter data, press enter to finish: ")
-    if(user_input != ""):
+    while(user_input != ""):
+
         line = []
         line.append(user_input.split(','))
         for i in range(0, len(line[0])):
            line[0][i] = float(line[0][i])
-        if abs(net.sim(line)) > 0.6:
-            print("Arrythmia exists!")
-        else:
-            print("Arrythmia doesn't exist!")
+        print("Probability that arrythmia exists is {0}%"\
+              .format(abs(net.sim(line)[0][0])*100))
         res = net_18_100.sim(line)
-        for r in range(0, len(res)):
-            if(res[0][r] == max(res[0])):
-                print("Arrythmia class: {0}"\
-                      .format(r+1))
+        res = list(res)
+        res[0] = list(res[0])
+        print("Arrythmia class: {0}" \
+              .format(res[0].index(max(res[0]))+1))
+        user_input = input("Enter data, press enter to finish: ")
+
 
