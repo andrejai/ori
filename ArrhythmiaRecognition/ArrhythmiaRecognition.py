@@ -9,6 +9,7 @@ import numpy as nmp
 import neurolab as nl
 import matplotlib.pyplot as plot
 import os.path
+import pylab
 import math
 import sys
 nmp.seterr(divide='ignore', invalid='ignore')
@@ -37,12 +38,15 @@ def seeCorrelation(lines):
     choosenCols.append(0)
 
     correlations = nmp.corrcoef(columns)
+
+    plot.matshow(correlations, cmap=plot.cm.Greens)
+    pylab.show()
     for i in range(0, len(correlations)):
         for j in range(i+1, len(correlations[0])):
             if i in choosenCols:
-                if (correlations[i][j] < 0.75 and (not choosenCols.__contains__(j))):
+                if (abs(correlations[i][j]) < 0.6 and (not choosenCols.__contains__(j))):
                     choosenCols.append(j)
-                elif correlations[i][j] > 0.75 and choosenCols.__contains__(j):
+                elif abs(correlations[i][j]) > 0.6 and choosenCols.__contains__(j):
                     choosenCols.remove(j)
 
     result = []
@@ -390,13 +394,13 @@ if __name__ == '__main__':
         line.append(user_input.split(','))
         for i in range(0, len(line[0])):
            line[0][i] = float(line[0][i])
-        print("Probability that arrythmia exists is {0}%"\
-              .format(abs(net.sim(line)[0][0])*100))
         res = net_18_100.sim(line)
         res = list(res)
         res[0] = list(res[0])
-        print("Arrythmia class: {0}" \
+        print("Arrhythmia class: {0}" \
               .format(res[0].index(max(res[0]))+1))
+        if(res[0].index(max(res[0])) == 0):
+            print("Arrhythmia is not recognized! You don't have arrhythmia!")
         user_input = input("Enter data, press enter to finish: ")
 
 
