@@ -85,10 +85,15 @@ def loadData():
         r[int(line[len(line)-1])-1] = 1
         results.append(r)
         line.pop()
-
+    maxVal = 0
     for i in range(0, len(lines)):
         for j in range(0, len(lines[0])):
             lines[i][j] = float(lines[i][j])
+        if(maxVal < max(lines[i])):
+            maxVal = max(lines[i])
+    for i in range(0, len(lines)):
+        for j in range(0, len(lines[0])):
+            lines[i][j] = lines[i][j]/maxVal
     return lines, results
 
 
@@ -143,9 +148,15 @@ def loadAllData():
         results.append(r)
         line.pop()
 
+    maxVal = 0
     for i in range(0, len(lines)):
         for j in range(0, len(lines[0])):
             lines[i][j] = float(lines[i][j])
+        if (maxVal < max(lines[i])):
+            maxVal = max(lines[i])
+    for i in range(0, len(lines)):
+        for j in range(0, len(lines[0])):
+            lines[i][j] = lines[i][j] / maxVal
     return lines, results
 
 """
@@ -203,9 +214,8 @@ def setNN(input, output):
     XInput, YOutput, XTest, YTest = splitData(input, output)
     if os.path.isfile("training.net"):
         return nl.load("training.net")
-    net = nl.net.newff([[0, 400]] * len(XInput[0]), [32, 16])
+    net = nl.net.newff([[-1, 1]] * len(XInput[0]), [32, 16])
     net.trainf = nl.net.train.train_rprop
-    net.out_minmax = [0, 1]
     net.init()
     result = net.train(XInput, YOutput, epochs=10000, show=1, goal=0.0001)
     net.save("training.net")
@@ -215,7 +225,6 @@ def setNN(input, output):
     #how many good classifications
     true = 0
     for i in range(0, len(res)):
-        print(max(res[i]), res[i])
         for j in range(0, 16):
             if (res[i][j] == max(res[i])):
                 if (YOutput[i][j] == 1.0):
@@ -228,7 +237,7 @@ def setAllNN(input, output):
     XInput, YOutput, XTest, YTest = splitData(input, output)
     if os.path.isfile("trainingAll.net"):
         return nl.load("trainingAll.net")
-    net = nl.net.newff([[0, 1000]] * len(XInput[0]), [30, 16])
+    net = nl.net.newff([[-1, 1]] * len(XInput[0]), [30, 16])
     net.trainf = nl.net.train.train_rprop
     net.init()
     result = net.train(XInput, YOutput, epochs=50, show=1, goal=0.00001)
@@ -239,7 +248,6 @@ def setAllNN(input, output):
     #how many good classifications
     true = 0
     for i in range(0, len(res)):
-        print(max(res[i]), res[i])
         for j in range(0, 16):
             if (res[i][j] == max(res[i])):
                 if (YOutput[i][j] == 1.0):
@@ -253,7 +261,7 @@ def setNNOneOutput(input, output, path, neurons):
     XInput, YOutput, XTest, YTest = splitData(input, output)
     if os.path.isfile(path):
         return nl.load(path)
-    net = nl.net.newff([[0, 400]] * len(XInput[0]), [neurons, 1])
+    net = nl.net.newff([[-1, 1]] * len(XInput[0]), [neurons, 1])
     net.trainf = nl.net.train.train_bfgs
     net.init()
     result = net.train(XInput, YOutput, epochs=200, show=1, goal=0.0001)
