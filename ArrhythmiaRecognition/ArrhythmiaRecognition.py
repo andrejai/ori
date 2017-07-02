@@ -9,8 +9,9 @@ import numpy as nmp
 import neurolab as nl
 import matplotlib.pyplot as plot
 import os.path
+import math
 import sys
-
+nmp.seterr(divide='ignore', invalid='ignore')
 """
     Correlation of every two columns that don't have missing values is counted.
     Columns represent values of one attribute of EKG
@@ -31,14 +32,23 @@ def seeCorrelation(lines):
     for i in range(0, len(columns)):
         for j in range(0, len(columns[0])):
             columns[i][j] = float(columns[i][j])
-    correlations = []
 
+    choosenCols = [] #indexes of columns with minimum correlations
+    choosenCols.append(0)
 
-    #For every two columns counts correlation
-    for i in range(0, len(columns)):
-        for j in range(i+1, len(columns)):
-            nmp.corrcoef(columns[i], columns[j])
+    correlations = nmp.corrcoef(columns)
+    for i in range(0, len(correlations)):
+        for j in range(i+1, len(correlations[0])):
+            if i in choosenCols:
+                if (correlations[i][j] < 0.75 and (not choosenCols.__contains__(j))):
+                    choosenCols.append(j)
+                elif correlations[i][j] > 0.75 and choosenCols.__contains__(j):
+                    choosenCols.remove(j)
 
+    result = []
+    for i in choosenCols:
+        result.append(columns[i])
+    return result
 
 """
     Loads EKG attributes from file, 452 EKG rows with 279 attributes.
@@ -59,7 +69,6 @@ def loadData():
     for i in range (0, len(lines)):
         lines[i] = lines[i].split(',')
 
-    #seeCorrelation(lines)
     #select only attributes that will be used for training neural network
     for i in range(0, len(lines)):
         selected.append([])
@@ -83,11 +92,11 @@ def loadData():
         lines.remove(line)
 
     #make list of outputs
-    for line in lines:
+    for i in range(0, len(lines)):
         r = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        r[int(line[len(line)-1])-1] = 1
+        r[int(lines[i][len(lines[i])-1])-1] = 1
         results.append(r)
-        line.pop()
+        lines[i].pop()
     maxVal = 0
     for i in range(0, len(lines)):
         for j in range(0, len(lines[0])):
@@ -148,11 +157,11 @@ def loadAllData():
         lines.remove(line)
 
     # make list of outputs
-    for line in lines:
+    for i in range(0, len(lines)):
         r = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        r[int(line[len(line) - 1]) - 1] = 1
+        r[int(lines[i][len(lines[i])-1])-1] = 1
         results.append(r)
-        line.pop()
+        lines[i].pop()
 
     maxVal = 0
     for i in range(0, len(lines)):
@@ -165,6 +174,36 @@ def loadAllData():
             lines[i][j] = lines[i][j] / maxVal
     return lines, results
 
+
+def loadCorrelationCols():
+    file = open("arrhythmia.data.txt", 'r')
+    lines = file.readlines()
+    results = []
+    selected = []
+
+    # make every line in list of attributes
+    for i in range(0, len(lines)):
+        lines[i] = lines[i].split(',')
+        result = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        result[int(lines[i][len(lines[i])-1])-1] = 1
+        results.append(result)
+        lines[i].pop()
+    cols = seeCorrelation(lines)
+    for j in range(0, len(cols[0])):
+        ekg = []
+        for i in range(0, len(cols)):
+            ekg.append(cols[i][j])
+        selected.append(ekg)
+
+    maxVal = 0
+    for i in range(0, len(selected)):
+        if (maxVal < max(selected[i])):
+            maxVal = max(selected[i])
+    for i in range(0, len(selected)):
+        for j in range(0, len(selected[0])):
+            selected[i][j] = selected[i][j] / maxVal
+    return selected, results
+
 """
     Tests number of successful classified arrhythmia.
     Output is percentage.
@@ -172,17 +211,20 @@ def loadAllData():
 def test(net, XTest, YTest):
     netOutput = net.sim(XTest)
     true = 0
+    existence = 0
     for i in range(0, len(netOutput)):
         for j in range(0, len(YTest[0])):
             if (netOutput[i][j] == max(netOutput[i])):
                 if (YTest[i][j] == 1.0):
-                    print(j)
-                    print(max(netOutput[i]))
-                    print(netOutput[i])
-                    print(XTest[i])
                     true += 1
-    print("\n\n\tPercentage of correctly classified arrhythmia using NN is: {0}" \
-        .format(true/len(XTest)))
+                if(j == 0 and YTest[i][j] == 1.0):
+                    existence += 1
+                elif YTest[i][0] == 0 and j != 0:
+                    existence += 1
+    print("\n\n\tPercentage of correctly classified arrhythmia using NN is: {0}%" \
+        .format((true/len(XTest))*100))
+    print("\n\n\tPercentage of correctly discovering presence of arrhythmia using classification NN is: {0}%" \
+          .format((existence/len(XTest))*100))
 
 """
     Testing successfully recognized arrhythmia
@@ -195,8 +237,8 @@ def testOneOutput(net, XTest, YTest):
             true += 1
         elif (netOutput[i][0] < 0.6 and YTest[i][0] == 0):
             true += 1
-    print("\n\n\tPercentage of correctly discovered arrhythmia using NN is: {0}" \
-          .format(true / len(XTest)))
+    print("\n\n\tPercentage of correctly discovered arrhythmia using NN is: {0}%" \
+          .format((true/len(XTest))*100))
 
 
 """
@@ -332,6 +374,14 @@ if __name__ == '__main__':
     net = setNNOneOutput(inp, output, "trainingOneOutputProba.net", 6, 500)
     XInput, YOutput, XTest, YTest = splitData(inp, output)
     testOneOutput(net, XTest, YTest)
+
+    # Columns based on minimal correlation
+    inp, output = loadCorrelationCols()
+    print(len(inp[0]))
+    net_corr = setNN(inp, output, "training_correlation_cols.net", 30, 200)
+    print("\n\tAttributes that are used were picked based on correlations between attributes.")
+    XInput, YOutput, XTest, YTest = splitData(inp, output)
+    test(net_corr, XTest, YTest)
 
     user_input = input("Enter data, press enter to finish: ")
     while(user_input != ""):
