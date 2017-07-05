@@ -5,7 +5,6 @@ import matplotlib.pyplot as plot
 import os.path
 import pylab
 import math
-import sys
 nmp.seterr(divide='ignore', invalid='ignore') #ignore dividing with 0 problems
 
 #classes of arrhythmia

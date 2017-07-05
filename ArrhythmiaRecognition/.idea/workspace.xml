@@ -18,14 +18,13 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ArrhythmiaRecognition.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ArrhythmiaRecognition.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ArrhythmiaRecognition.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="163">
-              <caret line="419" column="85" lean-forward="false" selection-start-line="419" selection-start-column="85" selection-end-line="419" selection-end-column="85" />
+            <state relative-caret-position="68">
+              <caret line="4" column="14" lean-forward="true" selection-start-line="4" selection-start-column="14" selection-end-line="4" selection-end-column="14" />
               <folding>
-                <element signature="e#0#20#0" expanded="true" />
-                <element signature="e#8963#9305#0" expanded="false" />
+                <element signature="e#8952#9294#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -41,7 +40,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="arrhythmia.names.txt" pinned="false" current-in-tab="true">
+      <file leaf-file-name="arrhythmia.names.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/arrhythmia.names.txt">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="315">
@@ -444,8 +443,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#20#0" expanded="true" />
-            <element signature="e#8963#9305#0" expanded="false" />
+            <element signature="e#8952#9294#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -493,8 +491,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#20#0" expanded="true" />
-            <element signature="e#8963#9305#0" expanded="false" />
+            <element signature="e#8952#9294#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -547,8 +544,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#20#0" expanded="true" />
-            <element signature="e#8963#9305#0" expanded="false" />
+            <element signature="e#8952#9294#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -564,8 +560,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#20#0" expanded="true" />
-            <element signature="e#8963#9305#0" expanded="false" />
+            <element signature="e#8952#9294#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -581,8 +576,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#20#0" expanded="true" />
-            <element signature="e#8963#9305#0" expanded="false" />
+            <element signature="e#8952#9294#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -660,22 +654,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ArrhythmiaRecognition.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="163">
-          <caret line="419" column="85" lean-forward="false" selection-start-line="419" selection-start-column="85" selection-end-line="419" selection-end-column="85" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-            <element signature="e#8963#9305#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/arrhythmia.names.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
           <caret line="185" column="28" lean-forward="false" selection-start-line="185" selection-start-column="22" selection-end-line="185" selection-end-column="28" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ArrhythmiaRecognition.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="14" lean-forward="true" selection-start-line="4" selection-start-column="14" selection-end-line="4" selection-end-column="14" />
+          <folding>
+            <element signature="e#8952#9294#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
